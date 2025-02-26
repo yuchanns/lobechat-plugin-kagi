@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@lobehub/chat-plugin-sdk": "^1.32.4",
-    "@lobehub/chat-plugins-gateway": "^1.9.0",
     "@mozilla/readability": "^0.5.0",
     "hono": "^4.7.2",
     "jsdom": "^26.0.0"

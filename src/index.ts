@@ -1,9 +1,9 @@
-import { cors } from 'hono/cors'
-import { logger } from 'hono/logger'
-import { prettyJSON } from 'hono/pretty-json'
-import { Hono } from 'hono/tiny'
-import { gateway, search } from './api'
-import { MANIFEST, MANIFEST_DEV } from './utils'
+import { cors } from "hono/cors"
+import { logger } from "hono/logger"
+import { prettyJSON } from "hono/pretty-json"
+import { Hono } from "hono/tiny"
+import { gateway, search } from "./api"
+import { MANIFEST, MANIFEST_DEV } from "./utils"
 
 const app = new Hono().use(
   prettyJSON(),
@@ -30,8 +30,8 @@ const app = new Hono().use(
 )
 
 app
-  .get('/', (c) => {
-    return c.text('Welcome to Kagi Search Plugin!, A plugin for LobeChat to search the web through Kagi Search Engine. All the routes are under `/api`.')
+  .get("/", (c) => {
+    return c.text("Welcome to Kagi Search Plugin!, A plugin for LobeChat to search the web through Kagi Search Engine. All the routes are under `/api`.")
   })
   .get("/manifest.json", (c) => {
     return c.json(MANIFEST)
@@ -39,8 +39,8 @@ app
   .get("/manifest-dev.json", (c) => {
     return c.json(MANIFEST_DEV)
   })
-  .basePath('/api')
-  .get('/', (c) => {
+  .basePath("/api")
+  .get("/", (c) => {
     return c.json({
       message: "Welcome to Kagi Search Plugin!",
       description:
@@ -59,7 +59,7 @@ app
       ],
     })
   })
-  .route('/gateway', gateway)
-  .route('/search', search)
+  .route("/gateway", gateway)
+  .route("/search", search)
 
 export default app

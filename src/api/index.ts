@@ -1,2 +1,2 @@
-export * from './gateway'
-export * from './search'
+export * from "./gateway"
+export * from "./search"

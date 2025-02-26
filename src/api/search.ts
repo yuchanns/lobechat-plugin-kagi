@@ -1,19 +1,19 @@
-import { Hono } from "hono/tiny";
-import { JSDOM } from "jsdom";
-import { Readability } from "@mozilla/readability";
+import { Hono } from "hono/tiny"
+import { JSDOM } from "jsdom"
+import { Readability } from "@mozilla/readability"
 import {
   createErrorResponse,
   getPluginSettingsFromRequest,
   PluginErrorType,
-} from "@lobehub/chat-plugin-sdk";
-import { errorHandler, PROMPT, ROLE } from "../utils";
+} from "@lobehub/chat-plugin-sdk"
+import { errorHandler, PROMPT, ROLE } from "../utils"
 
-type Settings = {
+interface Settings {
   API_KEY: string
 }
 
 export const search = new Hono()
-  .use('*', errorHandler)
+  .use("*", errorHandler)
   .get("/", (c) =>
     c.json(
       { message: "GET /api/search is not supported, use POST instead" },
@@ -21,12 +21,12 @@ export const search = new Hono()
     ),
   )
   .post("/", async (c) => {
-    const params = (await c.req.json()) as { query: string };
-    const settings = getPluginSettingsFromRequest<Settings>(c.req.raw);
+    const params = (await c.req.json()) as { query: string }
+    const settings = getPluginSettingsFromRequest<Settings>(c.req.raw)
     if (!settings) {
       return createErrorResponse(PluginErrorType.PluginSettingsInvalid, {
         message: "Plugin settings not found.",
-      });
+      })
     }
     const search = await fetch(
       `https://kagi.com/api/v0/search?q=${encodeURIComponent(params.query)}&limit=5`,
@@ -42,17 +42,17 @@ export const search = new Hono()
       data: {
         t: number, title: string, url: string, snippet: string
       }[]
-    };
+    }
 
     const items = json.data.filter((item) => item.t === 0).slice(0, 5)
 
     const contentPromises = items.map(async (item) => {
       try {
-        const response = await fetch(item.url);
-        const html = await response.text();
-        const doc = new JSDOM(html);
-        const reader = new Readability(doc.window.document);
-        const article = reader.parse();
+        const response = await fetch(item.url)
+        const html = await response.text()
+        const doc = new JSDOM(html)
+        const reader = new Readability(doc.window.document)
+        const article = reader.parse()
 
         return {
           source: {
@@ -61,8 +61,9 @@ export const search = new Hono()
             description: item.snippet,
           },
           content: article?.textContent || "",
-        };
+        }
       } catch (e) {
+        console.log(e)
         return {
           source: {
             title: item.title,
@@ -70,11 +71,11 @@ export const search = new Hono()
             description: item.snippet,
           },
           content: "",
-        };
+        }
       }
     })
 
-    const results = await Promise.all(contentPromises);
+    const results = await Promise.all(contentPromises)
     const formattedResponse = `
 Role: ${ROLE}
 
@@ -92,7 +93,7 @@ URL: ${result.source.url}
 Content: ${result.content.trim()}
 `,
         )
-        .join("\n")}`;
+        .join("\n")}`
 
-    return c.text(formattedResponse);
+    return c.text(formattedResponse)
   })

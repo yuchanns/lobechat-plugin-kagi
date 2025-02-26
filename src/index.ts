@@ -26,6 +26,7 @@ const app = new Hono().use(
       "x-lobe-chat-auth",
     ],
     allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    maxAge: 86400,
   }),
 )
 

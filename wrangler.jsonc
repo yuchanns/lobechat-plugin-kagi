@@ -2,10 +2,10 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "lobechat-plugin-kagi",
   "main": "dist/index.js",
-  "compatibility_date": "2025-02-26"
-  // "compatibility_flags": [
-  //   "nodejs_compat"
-  // ],
+  "compatibility_date": "2025-02-26",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
   // "vars": {
   //   "MY_VAR": "my-variable"
   // },

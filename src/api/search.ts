@@ -1,5 +1,5 @@
 import { Hono } from "hono/tiny"
-import { JSDOM } from "jsdom"
+import { parseHTML } from "linkedom"
 import { Readability } from "@mozilla/readability"
 import {
   createErrorResponse,
@@ -32,8 +32,8 @@ export const doSearch = async (query: string, settings: Settings) => {
     try {
       const response = await fetch(item.url)
       const html = await response.text()
-      const doc = new JSDOM(html)
-      const reader = new Readability(doc.window.document)
+      const { document } = parseHTML(html)
+      const reader = new Readability(document)
       const article = reader.parse()
 
       return {

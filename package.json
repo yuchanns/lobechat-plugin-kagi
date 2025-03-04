@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@lobehub/chat-plugin-sdk": "^1.32.4",
+    "@mixmark-io/domino": "^2.2.0",
     "hono": "^4.7.2",
-    "linkedom": "^0.18.9",
     "turndown": "^7.2.0"
   },
   "devDependencies": {

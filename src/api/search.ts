@@ -1,6 +1,6 @@
 import { Hono } from "hono/tiny"
 import TurndownService from "turndown"
-import { parseHTML } from "linkedom"
+import { createDocument } from "@mixmark-io/domino"
 import {
   createErrorResponse,
   getPluginSettingsFromRequest,
@@ -40,7 +40,7 @@ export const doSearch = async (query: string, settings: Settings) => {
         return ""
       }
       const html = await response.text()
-      const { document } = parseHTML(html)
+      const document = createDocument(html);
       const markdown = turndownService.turndown(document)
       return markdown
     } catch (e) {

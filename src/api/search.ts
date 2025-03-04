@@ -28,6 +28,7 @@ export const doSearch = async (query: string, settings: Settings) => {
 
   const items = json.data.filter((item) => item.t === 0).slice(0, 5)
   const turndownService = new TurndownService()
+  turndownService.remove(["script", "style", "header", "footer"])
 
   const contentPromises = items.map(async (item) => {
     try {

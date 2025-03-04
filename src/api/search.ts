@@ -30,7 +30,11 @@ export const doSearch = async (query: string, settings: Settings) => {
 
   const contentPromises = items.map(async (item) => {
     try {
-      const response = await fetch(item.url)
+      const response = await fetch(item.url, {
+        headers: {
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36",
+        }
+      })
       const html = await response.text()
       const { document } = parseHTML(html)
       const reader = new Readability(document)

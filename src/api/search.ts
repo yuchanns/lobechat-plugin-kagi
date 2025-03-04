@@ -6,7 +6,7 @@ import {
   getPluginSettingsFromRequest,
   PluginErrorType,
 } from "@lobehub/chat-plugin-sdk"
-import { errorHandler, PROMPT, ROLE } from "../utils"
+import { errorHandler } from "../utils"
 import { Settings } from "../utils/search"
 
 export const doSearch = async (query: string, settings: Settings) => {
@@ -59,13 +59,6 @@ export const doSearch = async (query: string, settings: Settings) => {
 
   const results = await Promise.all(contentPromises)
   return `
-Role: ${ROLE}
-
-Prompt: ${PROMPT}
-
-Query: ${query}
-
-Data:
 ${results
       .filter((result) => result.content)
       .map(

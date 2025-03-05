@@ -3,7 +3,7 @@ import { logger } from "hono/logger"
 import { prettyJSON } from "hono/pretty-json"
 import { Hono } from "hono/tiny"
 import { gateway, search } from "./api"
-import { MANIFEST, MANIFEST_DEV } from "./utils"
+import { get_manifest } from "./utils"
 
 const app = new Hono().use(
   prettyJSON(),
@@ -35,10 +35,8 @@ app
     return c.text("Welcome to Kagi Search Plugin!, A plugin for LobeChat to search the web through Kagi Search Engine. All the routes are under `/api`.")
   })
   .get("/manifest.json", (c) => {
-    return c.json(MANIFEST)
-  })
-  .get("/manifest-dev.json", (c) => {
-    return c.json(MANIFEST_DEV)
+    const url = new URL(c.req.url)
+    return c.json(get_manifest(url))
   })
   .basePath("/api")
   .get("/", (c) => {

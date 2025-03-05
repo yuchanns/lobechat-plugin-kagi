@@ -6,5 +6,9 @@ compatibility_flags = ["nodejs_compat"]
 minify = true
 logpush = false
 
+services = [
+  { binding = "MYSELF", service = "lobechat-plugin-kagi" }
+]
+
 [observability]
 enabled = true

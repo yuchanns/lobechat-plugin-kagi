@@ -1,30 +1,53 @@
 import { Hono } from "hono/tiny"
 import {
   createErrorResponse,
-  getPluginSettingsFromRequest,
   PluginErrorType,
 } from "@lobehub/chat-plugin-sdk"
-import { Settings } from "../utils/search"
-import { doSearch } from "./search"
 
-export const gateway = new Hono()
+export const gateway = new Hono<{ Bindings: Bindings }>()
   .get("/", (c) =>
     c.json(
       { message: "GET /api/gateway is not supported, use POST instead" },
       405,
     ),
   )
+  // @ts-expect-error No overload matches this call
   .post("/", async (c) => {
-    const data = await c.req.json() as { arguments: string }
-    const args = JSON.parse(data.arguments) as {
-      query: string
+    const data = await c.req.json() as {
+      apiName: string
+      arguments: string
+      manifest: {
+        api: {
+          name: string
+          url: string
+        }[]
+      }
     }
-    const settings = getPluginSettingsFromRequest<Settings>(c.req.raw)
-    if (!settings) {
-      return createErrorResponse(PluginErrorType.PluginSettingsInvalid, {
-        message: "Plugin settings not found.",
+    const u = new URL(c.req.url)
+    const apiUrl = data.manifest.api.find((a) => a.name === data.apiName)?.url
+    if (!apiUrl) {
+      return createErrorResponse(PluginErrorType.PluginApiNotFound, {
+        message: `API not found for ${data.apiName}`,
       })
     }
-    const text = await doSearch(args.query, settings)
-    return c.text(text)
+    const au = new URL(apiUrl)
+    if (au.host !== u.host) {
+      return createErrorResponse(PluginErrorType.Forbidden, {
+        message: `API URL ${apiUrl} is not allowed for security reasons`,
+      })
+    }
+    const headers: Record<string, string> = {}
+    c.req.raw.headers.forEach((v, k) => {
+      if (k.toLowerCase().startsWith("x-lobe")) {
+        headers[k] = v
+      }
+    })
+    return await c.env.MYSELF.fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...headers,
+      },
+      body: data.arguments,
+    })
   })

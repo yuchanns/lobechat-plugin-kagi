@@ -5,7 +5,7 @@ import { Hono } from "hono/tiny"
 import { gateway, search } from "./api"
 import { get_manifest } from "./utils"
 
-const app = new Hono().use(
+const app = new Hono<{ Bindings: Bindings }>().use(
   prettyJSON(),
   logger(),
   cors({

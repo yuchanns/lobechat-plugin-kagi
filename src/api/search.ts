@@ -47,7 +47,7 @@ export const doSearch = async (query: string, settings: Settings) => {
         return ""
       }
       const html = await response.text()
-      const document = createDocument(html);
+      const document = createDocument(html)
       const markdown = turndownService.turndown(document)
       return markdown
     } catch (e) {

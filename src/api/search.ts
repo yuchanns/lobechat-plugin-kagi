@@ -10,6 +10,12 @@ import { errorHandler } from "../utils"
 import { Settings } from "../utils/search"
 
 export const doSearch = async (query: string, settings: Settings) => {
+  if (settings.Exclude) {
+    const exclude = settings.Exclude.split(",").map((e) => e.trim())
+    if (exclude.length > 0) {
+      query = query + " -" + exclude.join(" -")
+    }
+  }
   const search = await fetch(
     `https://kagi.com/api/v0/search?q=${encodeURIComponent(query)}&limit=5`,
     {

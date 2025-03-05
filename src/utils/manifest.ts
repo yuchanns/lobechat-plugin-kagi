@@ -20,6 +20,11 @@ export const MANIFEST = {
         "title": "API Key",
         "type": "string",
         "format": "password"
+      },
+      "Exclude": {
+        "title": "Search Exclusion",
+        "type": "string",
+        "default": "reddit, youtube",
       }
     }
   },

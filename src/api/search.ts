@@ -44,7 +44,7 @@ export const doSearch = async (query: string, settings: Settings) => {
         }
       })
       if (response.status !== 200) {
-        return ""
+        throw new Error(`Error fetching content: ${response.status} ${response.statusText}`)
       }
       const html = await response.text()
       const document = createDocument(html)

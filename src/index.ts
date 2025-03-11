@@ -60,6 +60,6 @@ app
   })
   .route("/gateway", apiGateway)
   .route("/search", apiSearch)
-  .route("fetch", apiFetch)
+  .route("/fetch", apiFetch)
 
 export default app

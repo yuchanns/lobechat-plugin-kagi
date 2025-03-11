@@ -4,7 +4,7 @@ import {
   PluginErrorType,
 } from "@lobehub/chat-plugin-sdk"
 
-export const gateway = new Hono<{ Bindings: Bindings }>()
+export const apiGateway = new Hono<{ Bindings: Bindings }>()
   .get("/", (c) =>
     c.json(
       { message: "GET /api/gateway is not supported, use POST instead" },

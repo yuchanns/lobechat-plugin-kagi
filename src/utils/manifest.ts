@@ -46,6 +46,22 @@ export const get_manifest = (url: URL) => {
             }
           }
         }
+      },
+      {
+        "name": "fetchContent",
+        "url": `${proto}//${host}/api/fetch`,
+        "description": "Fetch the content of a web page.",
+        "parameters": {
+          "required": ["url"],
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "format": "uri",
+              "description": "The URL of the web page to fetch"
+            }
+          }
+        }
       }
     ]
   }

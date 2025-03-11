@@ -2,7 +2,7 @@ import { cors } from "hono/cors"
 import { logger } from "hono/logger"
 import { prettyJSON } from "hono/pretty-json"
 import { Hono } from "hono/tiny"
-import { gateway, search } from "./api"
+import { apiFetch, apiGateway, apiSearch } from "./api"
 import { get_manifest } from "./utils"
 
 const app = new Hono<{ Bindings: Bindings }>().use(
@@ -58,7 +58,8 @@ app
       ],
     })
   })
-  .route("/gateway", gateway)
-  .route("/search", search)
+  .route("/gateway", apiGateway)
+  .route("/search", apiSearch)
+  .route("fetch", apiFetch)
 
 export default app

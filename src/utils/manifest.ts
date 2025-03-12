@@ -62,6 +62,15 @@ export const get_manifest = (url: URL) => {
             }
           }
         }
+      },
+      {
+        "name": "getDate",
+        "url": `${proto}//${host}/api/date`,
+        "description": "Get the current date.",
+        "parameters": {
+          "type": "object",
+          "properties": {}
+        }
       }
     ]
   }

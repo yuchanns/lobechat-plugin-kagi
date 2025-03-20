@@ -1,17 +1,29 @@
 import { LobeChatPluginManifest, PluginSchema } from "@lobehub/chat-plugin-sdk"
 
 // Replace the following with your plugin's information
-export const TITLE = "LobeChat Plugin Template"
-export const DESCRIPTION = "A template for LobeChat plugins running on Cloudflare Workers."
-const IDENTIFIER = "lobechat-identifier"
-const HOMEPAGE = "https://github.com/yuchanns/lobechat-plugin-template"
+export const TITLE = "Kagi Search"
+export const DESCRIPTION = "Smart web search that reads and analyzes pages to deliver comprehensive answers from Kagi results."
+const IDENTIFIER = "kagi-search"
+const HOMEPAGE = "https://github.com/yuchanns/lobechat-plugin-kagi"
 const AUTHOR = "yuchanns"
-const AVATAR = ""
-const TAGS: string[] = []
-const SYSTEM_ROLE = ""
+const AVATAR = "https://kagi.com/favicon-32x32.png"
+const TAGS: string[] = ["web", "search", "kagi"]
+const SYSTEM_ROLE = "You are a helpful assistant that can search the web through Kagi Search Engine and return the results in a structured format to help the user with their queries."
 const SETTINGS: PluginSchema = {
   type: "object",
-  properties: {},
+  required: ["API_KEY"],
+  properties: {
+    "API_KEY": {
+      "title": "API Key",
+      "type": "string",
+      "format": "password"
+    },
+    "Exclude": {
+      "title": "Search Exclusion",
+      "type": "string",
+      "default": "reddit, youtube",
+    }
+  },
 }
 
 export const buildManifest = (url: URL, providers: APIProvider[]): LobeChatPluginManifest => {

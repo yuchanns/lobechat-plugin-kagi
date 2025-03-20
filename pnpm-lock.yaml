@@ -11,9 +11,15 @@ importers:
       '@lobehub/chat-plugin-sdk':
         specifier: ^1.32.4
         version: 1.32.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@mixmark-io/domino':
+        specifier: ^2.2.0
+        version: 2.2.0
       hono:
         specifier: ^4.7.2
         version: 4.7.4
+      turndown:
+        specifier: ^7.2.0
+        version: 7.2.0
     devDependencies:
       '@cloudflare/workers-types':
         specifier: ^4.20250214.0
@@ -27,6 +33,9 @@ importers:
       '@hono/vite-dev-server':
         specifier: ^0.18.2
         version: 0.18.3(hono@4.7.4)(miniflare@4.20250310.0)(wrangler@4.0.0(@cloudflare/workers-types@4.20250313.0))
+      '@types/turndown':
+        specifier: ^5.0.5
+        version: 5.0.5
       eslint:
         specifier: ^9.21.0
         version: 9.22.0
@@ -633,6 +642,9 @@ packages:
       react: '>=18'
       react-dom: '>=18'
 
+  '@mixmark-io/domino@2.2.0':
+    resolution: {integrity: sha512-Y28PR25bHXUg88kCV7nivXrP2Nj2RueZ3/l/jdx6J9f8J4nsEGcgX0Qe6lt7Pa+J79+kPiJU3LguR6O/6zrLOw==}
+
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -853,6 +865,9 @@ packages:
 
   '@types/ramda@0.30.2':
     resolution: {integrity: sha512-PyzHvjCalm2BRYjAU6nIB3TprYwMNOUY/7P/N8bSzp9W/yM2YrtGtAnnVtaCNSeOZ8DzKyFDvaqQs7LnWwwmBA==}
+
+  '@types/turndown@5.0.5':
+    resolution: {integrity: sha512-TL2IgGgc7B5j78rIccBtlYAnkuv8nUQqhQc+DSYV5j9Be9XOcm/SKOVRuA47xAVI3680Tk9B1d8flK2GWT2+4w==}
 
   '@typescript-eslint/eslint-plugin@8.26.1':
     resolution: {integrity: sha512-2X3mwqsj9Bd3Ciz508ZUtoQQYpOhU/kWoUqIf49H8Z0+Vbh6UF/y0OEYp0Q0axOGzaBGs7QxRwq0knSQ8khQNA==}
@@ -1983,6 +1998,9 @@ packages:
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
+  turndown@7.2.0:
+    resolution: {integrity: sha512-eCZGBN4nNNqM9Owkv9HAtWRYfLA4h909E/WGAWWBpmB275ehNhZyk87/Tpvjbp0jjNl9XwCsbe6bm6CqFsgD+A==}
+
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
@@ -2551,6 +2569,8 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
+  '@mixmark-io/domino@2.2.0': {}
+
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
       '@nodelib/fs.stat': 2.0.5
@@ -2994,6 +3014,8 @@ snapshots:
   '@types/ramda@0.30.2':
     dependencies:
       types-ramda: 0.30.1
+
+  '@types/turndown@5.0.5': {}
 
   '@typescript-eslint/eslint-plugin@8.26.1(@typescript-eslint/parser@8.26.1(eslint@9.22.0)(typescript@5.8.2))(eslint@9.22.0)(typescript@5.8.2)':
     dependencies:
@@ -4353,6 +4375,10 @@ snapshots:
 
   tslib@2.8.1:
     optional: true
+
+  turndown@7.2.0:
+    dependencies:
+      '@mixmark-io/domino': 2.2.0
 
   type-check@0.4.0:
     dependencies:

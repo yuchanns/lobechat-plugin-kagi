@@ -1,5 +1,5 @@
 #:schema node_modules/wrangler/config-schema.json
-name = "lobechat-plugin-template"
+name = "lobechat-plugin-kagi"
 main = "dist/index.js"
 compatibility_date = "2025-02-26"
 compatibility_flags = ["nodejs_compat"]
@@ -7,7 +7,7 @@ minify = true
 logpush = false
 
 services = [
-  { binding = "MYSELF", service = "lobechat-plugin-template" }
+  { binding = "MYSELF", service = "lobechat-plugin-kagi" }
 ]
 
 [observability]

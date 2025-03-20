@@ -1,6 +1,9 @@
-import apiWeather from "./weather"
+import apiDate from "./date"
+import apiFetch from "./fetch"
+import apiSearch from "./search"
 
 export const providers: APIProvider[] = [
-  apiWeather,
-  // ...add your providers here
+  apiSearch,
+  apiFetch,
+  apiDate,
 ]

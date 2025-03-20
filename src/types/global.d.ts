@@ -16,4 +16,9 @@ declare global {
     description: string
     parameters: PluginSchema
   }
+
+  interface Settings {
+    API_KEY: string
+    Exclude: string
+  }
 }

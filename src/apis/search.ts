@@ -35,8 +35,12 @@ route.post("/*", async (c) => {
       query = query + " -" + exclude.join(" -")
     }
   }
+  let host = settings.Host
+  if (!host) {
+    host = "https://kagi.com"
+  }
   const search = await fetch(
-    `https://kagi.com/api/v0/search?q=${encodeURIComponent(query)}&limit=5`,
+    `${host}/api/v0/search?q=${encodeURIComponent(query)}&limit=5`,
     {
       headers: {
         Authorization: `Bot ${settings.API_KEY}`,

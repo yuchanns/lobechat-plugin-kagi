@@ -22,6 +22,12 @@ const SETTINGS: PluginSchema = {
       "title": "Search Exclusion",
       "type": "string",
       "default": "reddit, youtube",
+    },
+    "Host": {
+      "title": "Kagi Host",
+      "type": "string",
+      "default": "https://kagi.com",
+      "description": "The Kagi host URL, default is https://kagi.com"
     }
   },
 }

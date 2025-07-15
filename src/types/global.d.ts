@@ -20,5 +20,6 @@ declare global {
   interface Settings {
     API_KEY: string
     Exclude: string
+    Host?: string
   }
 }
